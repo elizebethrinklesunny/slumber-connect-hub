@@ -163,11 +163,11 @@ function CrudSection({ table, fields }: { table: TableName; fields: FieldDef[] }
     const payload = { ...form };
 
     if (editingId) {
-      const { error } = await supabase.from(table).update(payload).eq("id", editingId);
+      const { error } = await supabase.from(table).update(payload as never).eq("id", editingId);
       if (error) { toast.error(error.message); return; }
       toast.success("Updated successfully");
     } else {
-      const { error } = await supabase.from(table).insert(payload);
+      const { error } = await supabase.from(table).insert(payload as never);
       if (error) { toast.error(error.message); return; }
       toast.success("Created successfully");
     }
