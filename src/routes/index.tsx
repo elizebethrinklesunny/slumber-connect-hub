@@ -1,17 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/landing/Header";
 import { BannerSection } from "@/components/landing/BannerSection";
-import { TrustBadges } from "@/components/landing/TrustBadges";
 import { OffersSection } from "@/components/landing/OffersSection";
 import { CategoriesSection } from "@/components/landing/CategoriesSection";
-import { ProductsSection } from "@/components/landing/ProductsSection";
-import { MattressLayers } from "@/components/landing/MattressLayers";
-import { DealOfWeek } from "@/components/landing/DealOfWeek";
 import { TestimonialsSection } from "@/components/landing/TestimonialsSection";
-import { SuperSaleBanner } from "@/components/landing/SuperSaleBanner";
-import { WhyBuySection } from "@/components/landing/WhyBuySection";
 import { ContactSection } from "@/components/landing/ContactSection";
-import { ImageGallery } from "@/components/landing/ImageGallery";
 import { Footer } from "@/components/landing/Footer";
 import { WhatsAppFab } from "@/components/landing/WhatsAppFab";
 
@@ -32,17 +25,10 @@ function Index() {
     <div className="min-h-screen">
       <Header />
       <BannerSection />
-      <TrustBadges />
       <OffersSection />
       <CategoriesSection />
-      <ProductsSection />
-      <MattressLayers />
-      <DealOfWeek />
       <TestimonialsSection />
-      <SuperSaleBanner />
       <ContactSection />
-      <WhyBuySection />
-      <ImageGallery />
       <Footer />
       <WhatsAppFab />
     </div>

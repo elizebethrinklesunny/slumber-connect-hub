@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { Star } from "lucide-react";
 
 interface Testimonial {
@@ -10,39 +12,8 @@ interface Testimonial {
   customer_image_url: string | null;
 }
 
-const defaultTestimonials: Testimonial[] = [
-  {
-    id: "1",
-    customer_name: "Balla Daniella",
-    rating: 5,
-    review_text: "Perfect blend of softness and firmness. It provides great neck support while sleeping and is also fantastic for propping up during movie nights or working from bed.",
-    customer_image_url: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&q=80",
-  },
-  {
-    id: "2",
-    customer_name: "Katona Beatrix",
-    rating: 5,
-    review_text: "This pillow has exceeded my expectations! It's incredibly soft but doesn't lose its shape, making it perfect for long reading sessions or relaxing in bed on weekends.",
-    customer_image_url: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&q=80",
-  },
-  {
-    id: "3",
-    customer_name: "Miksa Fruzsina",
-    rating: 5,
-    review_text: "Extremely comfortable and supportive. I've noticed less neck pain since switching to this, and it's great for lounging in bed with my laptop or watching shows.",
-    customer_image_url: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80",
-  },
-  {
-    id: "4",
-    customer_name: "Kende Lili",
-    rating: 5,
-    review_text: "The best pillow I've ever owned! It's incredibly cozy yet firm enough to provide excellent back support when I'm sitting up to journal, read, or watch TV.",
-    customer_image_url: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&q=80",
-  },
-];
-
 export function TestimonialsSection() {
-  const [testimonials, setTestimonials] = useState<Testimonial[]>(defaultTestimonials);
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
 
   useEffect(() => {
     supabase
@@ -51,65 +22,55 @@ export function TestimonialsSection() {
       .eq("is_active", true)
       .order("sort_order")
       .then(({ data }) => {
-        if (data && data.length > 0) setTestimonials(data);
+        if (data) setTestimonials(data);
       });
   }, []);
+
+  if (testimonials.length === 0) return null;
 
   return (
     <section id="testimonials" className="py-20">
       <div className="mx-auto max-w-7xl px-4">
-        <div className="mb-12 flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
-          <div>
-            <h2 className="font-display text-3xl font-bold text-navy md:text-4xl">
-              Hear From Our Happy Customers
-            </h2>
-            <p className="mt-2 text-muted-foreground">
-              Discover why our customers love their sleep experiences with us!
-            </p>
-          </div>
-          <button className="rounded-full border-2 border-navy px-6 py-2.5 text-sm font-semibold text-navy transition hover:bg-navy hover:text-navy-foreground">
-            Read All Testimonials
-          </button>
+        <div className="mb-12 text-center">
+          <Badge variant="secondary" className="mb-3 text-xs uppercase tracking-widest">
+            Reviews
+          </Badge>
+          <h2 className="font-display text-4xl font-bold text-foreground">
+            What Our Customers Say
+          </h2>
         </div>
-
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {testimonials.map((t) => (
-            <div
-              key={t.id}
-              className="group flex flex-col gap-4 overflow-hidden rounded-xl border bg-card shadow-sm transition hover:shadow-md md:flex-row"
-            >
-              <div className="flex flex-1 flex-col justify-between p-6">
-                <div>
-                  <div className="flex gap-0.5">
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <Star
-                        key={i}
-                        size={14}
-                        className={i < t.rating ? "fill-gold text-gold" : "text-muted"}
-                      />
-                    ))}
-                  </div>
-                  <h3 className="mt-3 font-display text-base font-bold text-foreground leading-snug">
-                    {t.review_text.length > 60
-                      ? t.review_text.substring(0, 60).trim() + "..."
-                      : t.review_text}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    {t.review_text}
-                  </p>
+            <Card key={t.id} className="border-0 shadow-md">
+              <CardContent className="p-6">
+                <div className="mb-4 flex gap-1">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star
+                      key={i}
+                      size={16}
+                      className={i < t.rating ? "fill-warm text-warm" : "text-muted"}
+                    />
+                  ))}
                 </div>
-                <p className="mt-4 text-sm font-semibold text-navy">{t.customer_name}</p>
-              </div>
-              {t.customer_image_url && (
-                <div className="w-full shrink-0 md:w-48">
-                  <img
-                    src={t.customer_image_url}
-                    alt={t.customer_name}
-                    className="h-48 w-full object-cover md:h-full"
-                  />
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  "{t.review_text}"
+                </p>
+                <div className="mt-5 flex items-center gap-3">
+                  {t.customer_image_url ? (
+                    <img
+                      src={t.customer_image_url}
+                      alt={t.customer_name}
+                      className="h-10 w-10 rounded-full object-cover"
+                    />
+                  ) : (
+                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground">
+                      {t.customer_name.charAt(0)}
+                    </div>
+                  )}
+                  <span className="text-sm font-semibold">{t.customer_name}</span>
                 </div>
-              )}
-            </div>
+              </CardContent>
+            </Card>
           ))}
         </div>
       </div>
