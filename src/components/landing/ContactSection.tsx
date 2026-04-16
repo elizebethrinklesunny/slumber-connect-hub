@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Badge } from "@/components/ui/badge";
 import { MessageCircle, Phone, MapPin } from "lucide-react";
 
 const WHATSAPP_NUMBER = "919745358126";
@@ -19,38 +18,39 @@ export function ContactSection() {
   };
 
   return (
-    <section id="contact" className="bg-secondary/50 py-20">
+    <section id="contact" className="bg-secondary py-20">
       <div className="mx-auto max-w-7xl px-4">
         <div className="mb-12 text-center">
-          <Badge variant="secondary" className="mb-3 text-xs uppercase tracking-widest">
-            Get In Touch
-          </Badge>
-          <h2 className="font-display text-4xl font-bold text-foreground">
+          <h2 className="font-display text-3xl font-bold text-navy md:text-4xl">
             Connect With Us
           </h2>
-          <p className="mx-auto mt-3 max-w-md text-muted-foreground">
+          <p className="mt-3 text-muted-foreground">
             Have questions? Reach out to us directly on WhatsApp
           </p>
         </div>
         <div className="mx-auto grid max-w-4xl gap-10 md:grid-cols-2">
           <div className="space-y-6">
             <div className="flex items-start gap-4">
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-whatsapp text-whatsapp-foreground">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-whatsapp text-whatsapp-foreground">
                 <Phone size={20} />
               </div>
               <div>
-                <h3 className="font-semibold">Phone / WhatsApp</h3>
+                <h3 className="font-semibold text-foreground">Phone / WhatsApp</h3>
                 <p className="text-sm text-muted-foreground">+91 97453 58126</p>
               </div>
             </div>
             <div className="flex items-start gap-4">
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-navy text-navy-foreground">
                 <MapPin size={20} />
               </div>
               <div>
-                <h3 className="font-semibold">Visit Our Store</h3>
+                <h3 className="font-semibold text-foreground">Visit Our Store</h3>
                 <p className="text-sm text-muted-foreground">Find us at your nearest location</p>
               </div>
+            </div>
+            <div className="mt-4 rounded-xl bg-navy p-6 text-navy-foreground">
+              <p className="font-display text-lg font-bold">Still Have Questions?</p>
+              <p className="mt-1 text-sm text-white/70">Our Sleep Geniuses Are Here To Help.</p>
             </div>
           </div>
 
