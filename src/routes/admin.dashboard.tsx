@@ -10,6 +10,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
 import { Trash2, Plus, LogOut } from "lucide-react";
+import { SettingsTab } from "@/components/admin/SettingsTab";
 
 export const Route = createFileRoute("/admin/dashboard")({
   head: () => ({
@@ -26,10 +27,7 @@ function AdminDashboard() {
   useEffect(() => {
     const checkAuth = async () => {
       const { data: { user } } = await supabase.auth.getUser();
-      if (!user) {
-        navigate({ to: "/admin" });
-        return;
-      }
+      if (!user) { navigate({ to: "/admin" }); return; }
       const { data: roles } = await supabase
         .from("user_roles")
         .select("role")
@@ -72,16 +70,26 @@ function AdminDashboard() {
       </header>
       <main className="mx-auto max-w-7xl px-4 py-8">
         <Tabs defaultValue="banners">
-          <TabsList className="mb-6 grid w-full grid-cols-4">
+          <TabsList className="mb-6 flex w-full flex-wrap justify-start gap-1 h-auto">
             <TabsTrigger value="banners">Banners</TabsTrigger>
             <TabsTrigger value="offers">Offers</TabsTrigger>
             <TabsTrigger value="categories">Categories</TabsTrigger>
+            <TabsTrigger value="products">Products</TabsTrigger>
+            <TabsTrigger value="deals">Deals</TabsTrigger>
             <TabsTrigger value="testimonials">Testimonials</TabsTrigger>
+            <TabsTrigger value="trust_badges">Trust Badges</TabsTrigger>
+            <TabsTrigger value="gallery_images">Gallery</TabsTrigger>
+            <TabsTrigger value="settings">Settings</TabsTrigger>
           </TabsList>
           <TabsContent value="banners"><CrudSection table="banners" fields={bannerFields} /></TabsContent>
           <TabsContent value="offers"><CrudSection table="offers" fields={offerFields} /></TabsContent>
           <TabsContent value="categories"><CrudSection table="categories" fields={categoryFields} /></TabsContent>
+          <TabsContent value="products"><CrudSection table="products" fields={productFields} /></TabsContent>
+          <TabsContent value="deals"><CrudSection table="deals" fields={dealFields} /></TabsContent>
           <TabsContent value="testimonials"><CrudSection table="testimonials" fields={testimonialFields} /></TabsContent>
+          <TabsContent value="trust_badges"><CrudSection table="trust_badges" fields={trustBadgeFields} /></TabsContent>
+          <TabsContent value="gallery_images"><CrudSection table="gallery_images" fields={galleryFields} /></TabsContent>
+          <TabsContent value="settings"><SettingsTab /></TabsContent>
         </Tabs>
       </main>
     </div>
@@ -91,7 +99,7 @@ function AdminDashboard() {
 interface FieldDef {
   name: string;
   label: string;
-  type: "text" | "textarea" | "number" | "url" | "switch";
+  type: "text" | "textarea" | "number" | "url" | "switch" | "datetime";
   required?: boolean;
   defaultValue?: string | number | boolean;
 }
@@ -123,6 +131,30 @@ const categoryFields: FieldDef[] = [
   { name: "is_active", label: "Active", type: "switch", defaultValue: true },
 ];
 
+const productFields: FieldDef[] = [
+  { name: "name", label: "Name", type: "text", required: true },
+  { name: "description", label: "Description", type: "textarea" },
+  { name: "price", label: "Price (₹)", type: "number" },
+  { name: "original_price", label: "Original Price (₹)", type: "number" },
+  { name: "image_url", label: "Image URL", type: "url" },
+  { name: "category", label: "Category (e.g. mattresses, pillows, bedding)", type: "text", defaultValue: "mattresses" },
+  { name: "rating", label: "Rating (0-5)", type: "number", defaultValue: 5 },
+  { name: "badge", label: "Badge (e.g. Best Seller, New, Sale)", type: "text" },
+  { name: "sort_order", label: "Sort Order", type: "number", defaultValue: 0 },
+  { name: "is_active", label: "Active", type: "switch", defaultValue: true },
+];
+
+const dealFields: FieldDef[] = [
+  { name: "title", label: "Title", type: "text", required: true },
+  { name: "description", label: "Description", type: "textarea" },
+  { name: "image_url", label: "Image URL", type: "url" },
+  { name: "price", label: "Sale Price (₹)", type: "number" },
+  { name: "original_price", label: "Original Price (₹)", type: "number" },
+  { name: "ends_at", label: "Countdown End Date/Time", type: "datetime" },
+  { name: "sort_order", label: "Sort Order", type: "number", defaultValue: 0 },
+  { name: "is_active", label: "Active", type: "switch", defaultValue: true },
+];
+
 const testimonialFields: FieldDef[] = [
   { name: "customer_name", label: "Customer Name", type: "text", required: true },
   { name: "rating", label: "Rating (1-5)", type: "number", required: true, defaultValue: 5 },
@@ -132,7 +164,22 @@ const testimonialFields: FieldDef[] = [
   { name: "is_active", label: "Active", type: "switch", defaultValue: true },
 ];
 
-type TableName = "banners" | "offers" | "categories" | "testimonials";
+const trustBadgeFields: FieldDef[] = [
+  { name: "title", label: "Title", type: "text", required: true },
+  { name: "subtitle", label: "Subtitle", type: "text" },
+  { name: "icon", label: "Icon (BedDouble, Truck, ShieldCheck, CreditCard, Award, Clock, RefreshCw, Headphones)", type: "text", defaultValue: "ShieldCheck" },
+  { name: "sort_order", label: "Sort Order", type: "number", defaultValue: 0 },
+  { name: "is_active", label: "Active", type: "switch", defaultValue: true },
+];
+
+const galleryFields: FieldDef[] = [
+  { name: "image_url", label: "Image URL", type: "url", required: true },
+  { name: "caption", label: "Caption", type: "text" },
+  { name: "sort_order", label: "Sort Order", type: "number", defaultValue: 0 },
+  { name: "is_active", label: "Active", type: "switch", defaultValue: true },
+];
+
+type TableName = "banners" | "offers" | "categories" | "products" | "deals" | "testimonials" | "trust_badges" | "gallery_images";
 
 function CrudSection({ table, fields }: { table: TableName; fields: FieldDef[] }) {
   const [items, setItems] = useState<Record<string, unknown>[]>([]);
@@ -160,8 +207,13 @@ function CrudSection({ table, fields }: { table: TableName; fields: FieldDef[] }
   };
 
   const handleSave = async () => {
-    const payload = { ...form };
-
+    const payload: Record<string, unknown> = { ...form };
+    // strip empty strings for optional fields, convert empty datetime to null
+    fields.forEach((f) => {
+      if (payload[f.name] === "" || payload[f.name] === undefined) {
+        payload[f.name] = null;
+      }
+    });
     if (editingId) {
       const { error } = await supabase.from(table).update(payload as never).eq("id", editingId);
       if (error) { toast.error(error.message); return; }
@@ -176,7 +228,15 @@ function CrudSection({ table, fields }: { table: TableName; fields: FieldDef[] }
   };
 
   const handleEdit = (item: Record<string, unknown>) => {
-    setForm(item);
+    const formData: Record<string, unknown> = { ...item };
+    // Format datetime-local
+    fields.forEach((f) => {
+      if (f.type === "datetime" && formData[f.name]) {
+        const d = new Date(formData[f.name] as string);
+        formData[f.name] = d.toISOString().slice(0, 16);
+      }
+    });
+    setForm(formData);
     setEditingId(item.id as string);
     setShowForm(true);
   };
@@ -193,12 +253,9 @@ function CrudSection({ table, fields }: { table: TableName; fields: FieldDef[] }
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h2 className="font-display text-2xl font-bold capitalize">{table}</h2>
+        <h2 className="font-display text-2xl font-bold capitalize">{table.replace("_", " ")}</h2>
         <Button
-          onClick={() => {
-            resetForm();
-            setShowForm(true);
-          }}
+          onClick={() => { resetForm(); setShowForm(true); }}
           size="sm"
         >
           <Plus size={16} className="mr-1" /> Add New
@@ -229,13 +286,13 @@ function CrudSection({ table, fields }: { table: TableName; fields: FieldDef[] }
                   />
                 ) : (
                   <Input
-                    type={field.type === "number" ? "number" : "text"}
+                    type={field.type === "number" ? "number" : field.type === "datetime" ? "datetime-local" : "text"}
                     value={(form[field.name] as string | number) ?? ""}
                     onChange={(e) =>
                       setForm((f) => ({
                         ...f,
                         [field.name]:
-                          field.type === "number" ? Number(e.target.value) : e.target.value,
+                          field.type === "number" ? (e.target.value === "" ? "" : Number(e.target.value)) : e.target.value,
                       }))
                     }
                     required={field.required}
@@ -261,14 +318,8 @@ function CrudSection({ table, fields }: { table: TableName; fields: FieldDef[] }
               </p>
             </div>
             <div className="flex gap-2">
-              <Button size="sm" variant="outline" onClick={() => handleEdit(item)}>
-                Edit
-              </Button>
-              <Button
-                size="sm"
-                variant="destructive"
-                onClick={() => handleDelete(item.id as string)}
-              >
+              <Button size="sm" variant="outline" onClick={() => handleEdit(item)}>Edit</Button>
+              <Button size="sm" variant="destructive" onClick={() => handleDelete(item.id as string)}>
                 <Trash2 size={14} />
               </Button>
             </div>

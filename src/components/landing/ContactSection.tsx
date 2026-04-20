@@ -3,19 +3,20 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
-import { MessageCircle, Phone, MapPin } from "lucide-react";
-
-const WHATSAPP_NUMBER = "919745358126";
+import { MessageCircle, Phone, MapPin, Mail } from "lucide-react";
+import { useSiteSettings } from "@/hooks/useSiteSettings";
 
 export function ContactSection() {
+  const { settings } = useSiteSettings();
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
 
   const handleWhatsApp = () => {
+    const num = settings.whatsapp_number || "919745358126";
     const text = encodeURIComponent(
       `Hi DreamRest! I'm ${name || "a customer"}.\n\n${message || "I'd like to know more about your mattresses."}`
     );
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${text}`, "_blank");
+    window.open(`https://wa.me/${num}?text=${text}`, "_blank");
   };
 
   return (
@@ -32,7 +33,7 @@ export function ContactSection() {
             Have questions? Reach out to us directly on WhatsApp
           </p>
         </div>
-        <div className="mx-auto grid max-w-4xl gap-10 md:grid-cols-2">
+        <div className="mx-auto grid max-w-5xl gap-10 md:grid-cols-2">
           <div className="space-y-6">
             <div className="flex items-start gap-4">
               <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-whatsapp text-whatsapp-foreground">
@@ -40,16 +41,25 @@ export function ContactSection() {
               </div>
               <div>
                 <h3 className="font-semibold">Phone / WhatsApp</h3>
-                <p className="text-sm text-muted-foreground">+91 97453 58126</p>
+                <p className="text-sm text-muted-foreground">{settings.contact_phone || "+91 9745358126"}</p>
               </div>
             </div>
             <div className="flex items-start gap-4">
               <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground">
+                <Mail size={20} />
+              </div>
+              <div>
+                <h3 className="font-semibold">Email</h3>
+                <p className="text-sm text-muted-foreground">{settings.contact_email || "hello@dreamrest.com"}</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-4">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-navy text-navy-foreground">
                 <MapPin size={20} />
               </div>
               <div>
                 <h3 className="font-semibold">Visit Our Store</h3>
-                <p className="text-sm text-muted-foreground">Find us at your nearest location</p>
+                <p className="text-sm text-muted-foreground">{settings.contact_address || "Kerala, India"}</p>
               </div>
             </div>
           </div>
