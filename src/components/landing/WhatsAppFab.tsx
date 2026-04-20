@@ -1,11 +1,12 @@
 import { MessageCircle } from "lucide-react";
-
-const WHATSAPP_NUMBER = "919745358126";
+import { useSiteSettings } from "@/hooks/useSiteSettings";
 
 export function WhatsAppFab() {
+  const { settings } = useSiteSettings();
   const handleClick = () => {
+    const num = settings.whatsapp_number || "919745358126";
     const text = encodeURIComponent("Hi DreamRest! I'd like to know more about your mattresses.");
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${text}`, "_blank");
+    window.open(`https://wa.me/${num}?text=${text}`, "_blank");
   };
 
   return (
