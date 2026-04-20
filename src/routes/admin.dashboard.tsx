@@ -138,7 +138,7 @@ const productFields: FieldDef[] = [
   { name: "price", label: "Price (₹)", type: "number" },
   { name: "original_price", label: "Original Price (₹)", type: "number" },
   { name: "image_url", label: "Image URL", type: "url" },
-  { name: "category", label: "Category (e.g. mattresses, pillows, bedding)", type: "text", defaultValue: "mattresses" },
+  { name: "category", label: "Category", type: "category-select", required: true, defaultValue: "" },
   { name: "rating", label: "Rating (0-5)", type: "number", defaultValue: 5 },
   { name: "badge", label: "Badge (e.g. Best Seller, New, Sale)", type: "text" },
   { name: "sort_order", label: "Sort Order", type: "number", defaultValue: 0 },
