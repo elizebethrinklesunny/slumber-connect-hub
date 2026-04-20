@@ -49,6 +49,9 @@
   --color-whatsapp-foreground: var(--whatsapp-foreground);
   --color-warm: var(--warm);
   --color-warm-foreground: var(--warm-foreground);
+  --color-navy: var(--navy);
+  --color-navy-foreground: var(--navy-foreground);
+  --color-gold: var(--gold);
   --font-display: var(--font-display);
   --font-body: var(--font-body);
 }
@@ -93,6 +96,9 @@
   --whatsapp-foreground: oklch(1 0 0);
   --warm: oklch(0.75 0.1 60);
   --warm-foreground: oklch(0.2 0.05 50);
+  --navy: oklch(0.22 0.06 260);
+  --navy-foreground: oklch(0.98 0.005 80);
+  --gold: oklch(0.78 0.13 80);
 }
 
 .dark {
@@ -132,6 +138,9 @@
   --whatsapp-foreground: oklch(1 0 0);
   --warm: oklch(0.7 0.1 60);
   --warm-foreground: oklch(0.95 0.005 80);
+  --navy: oklch(0.18 0.05 260);
+  --navy-foreground: oklch(0.98 0.005 80);
+  --gold: oklch(0.78 0.13 80);
 }
 
 @layer base {
