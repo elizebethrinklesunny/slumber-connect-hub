@@ -298,6 +298,26 @@ function CrudSection({ table, fields }: { table: TableName; fields: FieldDef[] }
                     onChange={(e) => setForm((f) => ({ ...f, [field.name]: e.target.value }))}
                     required={field.required}
                   />
+                ) : field.type === "category-select" ? (
+                  categoryOptions.length === 0 ? (
+                    <p className="text-sm text-muted-foreground">
+                      No categories yet. Add one in the Categories tab first.
+                    </p>
+                  ) : (
+                    <Select
+                      value={(form[field.name] as string) || ""}
+                      onValueChange={(v) => setForm((f) => ({ ...f, [field.name]: v }))}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select a category" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {categoryOptions.map((c) => (
+                          <SelectItem key={c.id} value={c.name}>{c.name}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  )
                 ) : (
                   <Input
                     type={field.type === "number" ? "number" : field.type === "datetime" ? "datetime-local" : "text"}
