@@ -187,14 +187,27 @@ function CrudSection({ table, fields }: { table: TableName; fields: FieldDef[] }
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [form, setForm] = useState<Record<string, unknown>>({});
+  const [categoryOptions, setCategoryOptions] = useState<{ id: string; name: string }[]>([]);
+
+  const needsCategories = fields.some((f) => f.type === "category-select");
 
   const loadItems = async () => {
     const { data } = await supabase.from(table).select("*").order("sort_order");
     if (data) setItems(data);
   };
 
+  const loadCategories = async () => {
+    const { data } = await supabase
+      .from("categories")
+      .select("id, name")
+      .eq("is_active", true)
+      .order("sort_order");
+    if (data) setCategoryOptions(data);
+  };
+
   useEffect(() => {
     loadItems();
+    if (needsCategories) loadCategories();
   }, [table]);
 
   const resetForm = () => {
