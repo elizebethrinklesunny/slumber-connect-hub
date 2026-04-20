@@ -100,7 +100,7 @@ function AdminDashboard() {
 interface FieldDef {
   name: string;
   label: string;
-  type: "text" | "textarea" | "number" | "url" | "switch" | "datetime";
+  type: "text" | "textarea" | "number" | "url" | "switch" | "datetime" | "category-select";
   required?: boolean;
   defaultValue?: string | number | boolean;
 }
