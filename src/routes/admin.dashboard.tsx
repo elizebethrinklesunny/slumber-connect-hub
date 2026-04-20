@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Switch } from "@/components/ui/switch";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
 import { Trash2, Plus, LogOut } from "lucide-react";
 import { SettingsTab } from "@/components/admin/SettingsTab";
@@ -99,7 +100,7 @@ function AdminDashboard() {
 interface FieldDef {
   name: string;
   label: string;
-  type: "text" | "textarea" | "number" | "url" | "switch" | "datetime";
+  type: "text" | "textarea" | "number" | "url" | "switch" | "datetime" | "category-select";
   required?: boolean;
   defaultValue?: string | number | boolean;
 }
@@ -137,7 +138,7 @@ const productFields: FieldDef[] = [
   { name: "price", label: "Price (₹)", type: "number" },
   { name: "original_price", label: "Original Price (₹)", type: "number" },
   { name: "image_url", label: "Image URL", type: "url" },
-  { name: "category", label: "Category (e.g. mattresses, pillows, bedding)", type: "text", defaultValue: "mattresses" },
+  { name: "category", label: "Category", type: "category-select", required: true, defaultValue: "" },
   { name: "rating", label: "Rating (0-5)", type: "number", defaultValue: 5 },
   { name: "badge", label: "Badge (e.g. Best Seller, New, Sale)", type: "text" },
   { name: "sort_order", label: "Sort Order", type: "number", defaultValue: 0 },
@@ -186,14 +187,27 @@ function CrudSection({ table, fields }: { table: TableName; fields: FieldDef[] }
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [form, setForm] = useState<Record<string, unknown>>({});
+  const [categoryOptions, setCategoryOptions] = useState<{ id: string; name: string }[]>([]);
+
+  const needsCategories = fields.some((f) => f.type === "category-select");
 
   const loadItems = async () => {
     const { data } = await supabase.from(table).select("*").order("sort_order");
     if (data) setItems(data);
   };
 
+  const loadCategories = async () => {
+    const { data } = await supabase
+      .from("categories")
+      .select("id, name")
+      .eq("is_active", true)
+      .order("sort_order");
+    if (data) setCategoryOptions(data);
+  };
+
   useEffect(() => {
     loadItems();
+    if (needsCategories) loadCategories();
   }, [table]);
 
   const resetForm = () => {
@@ -284,6 +298,26 @@ function CrudSection({ table, fields }: { table: TableName; fields: FieldDef[] }
                     onChange={(e) => setForm((f) => ({ ...f, [field.name]: e.target.value }))}
                     required={field.required}
                   />
+                ) : field.type === "category-select" ? (
+                  categoryOptions.length === 0 ? (
+                    <p className="text-sm text-muted-foreground">
+                      No categories yet. Add one in the Categories tab first.
+                    </p>
+                  ) : (
+                    <Select
+                      value={(form[field.name] as string) || ""}
+                      onValueChange={(v) => setForm((f) => ({ ...f, [field.name]: v }))}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select a category" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {categoryOptions.map((c) => (
+                          <SelectItem key={c.id} value={c.name}>{c.name}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  )
                 ) : (
                   <Input
                     type={field.type === "number" ? "number" : field.type === "datetime" ? "datetime-local" : "text"}
