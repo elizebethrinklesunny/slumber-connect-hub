@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -11,11 +12,17 @@ export function ContactSection() {
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
 
-  const handleWhatsApp = () => {
+  const handleWhatsApp = async () => {
     const num = settings.whatsapp_number || "919745358126";
     const text = encodeURIComponent(
       `Hi DreamRest! I'm ${name || "a customer"}.\n\n${message || "I'd like to know more about your mattresses."}`
     );
+    // Log enquiry (best-effort, don't block WhatsApp open)
+    supabase.from("enquiries").insert({
+      customer_name: name || null,
+      message: message || null,
+      source: "contact_form",
+    }).then(() => {});
     window.open(`https://wa.me/${num}?text=${text}`, "_blank");
   };
 
