@@ -44,9 +44,14 @@ export function ProductsSection() {
 
   if (products.length === 0) return null;
 
-  const inquireOnWhatsApp = (productName: string) => {
+  const inquireOnWhatsApp = (product: Product) => {
     const num = settings.whatsapp_number || "919745358126";
-    const text = encodeURIComponent(`Hi DreamRest! I'm interested in "${productName}". Could you share more details?`);
+    const text = encodeURIComponent(`Hi DreamRest! I'm interested in "${product.name}". Could you share more details?`);
+    supabase.from("enquiries").insert({
+      message: `Product enquiry: ${product.name}`,
+      source: `product:${product.category}`,
+      product_id: product.id,
+    }).then(() => {});
     window.open(`https://wa.me/${num}?text=${text}`, "_blank");
   };
 
@@ -118,7 +123,7 @@ export function ProductsSection() {
                     )}
                   </div>
                   <Button
-                    onClick={() => inquireOnWhatsApp(p.name)}
+                    onClick={() => inquireOnWhatsApp(p)}
                     size="sm"
                     className="mt-3 w-full gap-1 bg-whatsapp text-whatsapp-foreground hover:bg-whatsapp/90"
                   >
