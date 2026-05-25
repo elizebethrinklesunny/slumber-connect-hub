@@ -170,6 +170,13 @@ export function CrudSection({
                       </SelectContent>
                     </Select>
                   )
+                ) : field.type === "image" || field.type === "pdf" ? (
+                  <FileUpload
+                    value={(form[field.name] as string) || null}
+                    onChange={(url) => setForm((f) => ({ ...f, [field.name]: url }))}
+                    accept={field.type === "pdf" ? "application/pdf" : "image/*"}
+                    kind={field.type}
+                  />
                 ) : (
                   <Input
                     type={field.type === "number" ? "number" : field.type === "datetime" ? "datetime-local" : "text"}
