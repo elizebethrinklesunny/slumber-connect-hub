@@ -84,6 +84,12 @@ export function Header() {
                 {l.label}
               </button>
             ))}
+            <Link
+              to="/products"
+              className="px-4 py-3 text-sm font-medium uppercase tracking-wide transition hover:bg-white/10"
+            >
+              All Products
+            </Link>
           </div>
           <Link to="/admin">
             <Button size="sm" variant="ghost" className="text-navy-foreground hover:bg-white/10 hover:text-navy-foreground">
