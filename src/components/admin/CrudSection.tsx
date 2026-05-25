@@ -9,11 +9,12 @@ import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
 import { Trash2, Plus } from "lucide-react";
+import { FileUpload } from "./FileUpload";
 
 export interface FieldDef {
   name: string;
   label: string;
-  type: "text" | "textarea" | "number" | "url" | "switch" | "datetime" | "category-select";
+  type: "text" | "textarea" | "number" | "url" | "switch" | "datetime" | "category-select" | "image" | "pdf";
   required?: boolean;
   defaultValue?: string | number | boolean;
 }
