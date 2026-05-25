@@ -247,6 +247,7 @@ export type Database = {
           is_active: boolean | null
           name: string
           original_price: number | null
+          pdf_url: string | null
           price: number | null
           rating: number | null
           sort_order: number | null
@@ -262,6 +263,7 @@ export type Database = {
           is_active?: boolean | null
           name: string
           original_price?: number | null
+          pdf_url?: string | null
           price?: number | null
           rating?: number | null
           sort_order?: number | null
@@ -277,6 +279,7 @@ export type Database = {
           is_active?: boolean | null
           name?: string
           original_price?: number | null
+          pdf_url?: string | null
           price?: number | null
           rating?: number | null
           sort_order?: number | null
