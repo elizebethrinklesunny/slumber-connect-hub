@@ -84,6 +84,12 @@ export function Header() {
                 {l.label}
               </button>
             ))}
+            <Link
+              to="/products"
+              className="px-4 py-3 text-sm font-medium uppercase tracking-wide transition hover:bg-white/10"
+            >
+              All Products
+            </Link>
           </div>
           <Link to="/admin">
             <Button size="sm" variant="ghost" className="text-navy-foreground hover:bg-white/10 hover:text-navy-foreground">
@@ -110,6 +116,9 @@ export function Header() {
                 {l.label}
               </button>
             ))}
+            <Link to="/products" onClick={() => setOpen(false)} className="rounded px-3 py-2 text-sm font-medium hover:bg-secondary">
+              All Products
+            </Link>
             <Link to="/admin" className="mt-2">
               <Button variant="outline" size="sm" className="w-full">Admin Panel</Button>
             </Link>

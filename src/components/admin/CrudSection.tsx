@@ -9,11 +9,12 @@ import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
 import { Trash2, Plus } from "lucide-react";
+import { FileUpload } from "./FileUpload";
 
 export interface FieldDef {
   name: string;
   label: string;
-  type: "text" | "textarea" | "number" | "url" | "switch" | "datetime" | "category-select";
+  type: "text" | "textarea" | "number" | "url" | "switch" | "datetime" | "category-select" | "image" | "pdf";
   required?: boolean;
   defaultValue?: string | number | boolean;
 }
@@ -169,6 +170,13 @@ export function CrudSection({
                       </SelectContent>
                     </Select>
                   )
+                ) : field.type === "image" || field.type === "pdf" ? (
+                  <FileUpload
+                    value={(form[field.name] as string) || null}
+                    onChange={(url) => setForm((f) => ({ ...f, [field.name]: url }))}
+                    accept={field.type === "pdf" ? "application/pdf" : "image/*"}
+                    kind={field.type}
+                  />
                 ) : (
                   <Input
                     type={field.type === "number" ? "number" : field.type === "datetime" ? "datetime-local" : "text"}
@@ -222,7 +230,7 @@ export function CrudSection({
 export const bannerFields: FieldDef[] = [
   { name: "title", label: "Title", type: "text", required: true },
   { name: "subtitle", label: "Subtitle", type: "text" },
-  { name: "image_url", label: "Image URL", type: "url" },
+  { name: "image_url", label: "Image", type: "image" },
   { name: "cta_text", label: "Button Text", type: "text", defaultValue: "Shop Now" },
   { name: "cta_link", label: "Button Link", type: "url" },
   { name: "sort_order", label: "Sort Order", type: "number", defaultValue: 0 },
@@ -233,7 +241,7 @@ export const offerFields: FieldDef[] = [
   { name: "title", label: "Title", type: "text", required: true },
   { name: "description", label: "Description", type: "textarea" },
   { name: "discount_percentage", label: "Discount %", type: "number" },
-  { name: "image_url", label: "Image URL", type: "url" },
+  { name: "image_url", label: "Image", type: "image" },
   { name: "sort_order", label: "Sort Order", type: "number", defaultValue: 0 },
   { name: "is_active", label: "Active", type: "switch", defaultValue: true },
 ];
@@ -241,7 +249,7 @@ export const offerFields: FieldDef[] = [
 export const categoryFields: FieldDef[] = [
   { name: "name", label: "Name", type: "text", required: true },
   { name: "description", label: "Description", type: "textarea" },
-  { name: "image_url", label: "Image URL", type: "url" },
+  { name: "image_url", label: "Image", type: "image" },
   { name: "sort_order", label: "Sort Order", type: "number", defaultValue: 0 },
   { name: "is_active", label: "Active", type: "switch", defaultValue: true },
 ];
@@ -251,7 +259,8 @@ export const productFields: FieldDef[] = [
   { name: "description", label: "Description", type: "textarea" },
   { name: "price", label: "Price (₹)", type: "number" },
   { name: "original_price", label: "Original Price (₹)", type: "number" },
-  { name: "image_url", label: "Image URL", type: "url" },
+  { name: "image_url", label: "Product Image", type: "image" },
+  { name: "pdf_url", label: "Brochure / Spec Sheet (PDF)", type: "pdf" },
   { name: "category", label: "Category", type: "category-select", required: true, defaultValue: "" },
   { name: "rating", label: "Rating (0-5)", type: "number", defaultValue: 5 },
   { name: "badge", label: "Badge (e.g. Best Seller, New, Sale)", type: "text" },
@@ -262,7 +271,7 @@ export const productFields: FieldDef[] = [
 export const dealFields: FieldDef[] = [
   { name: "title", label: "Title", type: "text", required: true },
   { name: "description", label: "Description", type: "textarea" },
-  { name: "image_url", label: "Image URL", type: "url" },
+  { name: "image_url", label: "Image", type: "image" },
   { name: "price", label: "Sale Price (₹)", type: "number" },
   { name: "original_price", label: "Original Price (₹)", type: "number" },
   { name: "ends_at", label: "Countdown End Date/Time", type: "datetime" },
@@ -274,7 +283,7 @@ export const testimonialFields: FieldDef[] = [
   { name: "customer_name", label: "Customer Name", type: "text", required: true },
   { name: "rating", label: "Rating (1-5)", type: "number", required: true, defaultValue: 5 },
   { name: "review_text", label: "Review", type: "textarea", required: true },
-  { name: "customer_image_url", label: "Customer Photo URL", type: "url" },
+  { name: "customer_image_url", label: "Customer Photo", type: "image" },
   { name: "sort_order", label: "Sort Order", type: "number", defaultValue: 0 },
   { name: "is_active", label: "Active", type: "switch", defaultValue: true },
 ];
@@ -288,7 +297,7 @@ export const trustBadgeFields: FieldDef[] = [
 ];
 
 export const galleryFields: FieldDef[] = [
-  { name: "image_url", label: "Image URL", type: "url", required: true },
+  { name: "image_url", label: "Image", type: "image", required: true },
   { name: "caption", label: "Caption", type: "text" },
   { name: "sort_order", label: "Sort Order", type: "number", defaultValue: 0 },
   { name: "is_active", label: "Active", type: "switch", defaultValue: true },
