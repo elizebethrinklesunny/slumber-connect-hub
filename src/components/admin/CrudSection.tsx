@@ -297,7 +297,7 @@ export const trustBadgeFields: FieldDef[] = [
 ];
 
 export const galleryFields: FieldDef[] = [
-  { name: "image_url", label: "Image URL", type: "url", required: true },
+  { name: "image_url", label: "Image", type: "image", required: true },
   { name: "caption", label: "Caption", type: "text" },
   { name: "sort_order", label: "Sort Order", type: "number", defaultValue: 0 },
   { name: "is_active", label: "Active", type: "switch", defaultValue: true },
