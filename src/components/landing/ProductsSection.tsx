@@ -145,6 +145,14 @@ export function ProductsSection() {
                   >
                     <MessageCircle size={14} /> Enquire
                   </Button>
+                  {p.pdf_url && (
+                    <button
+                      onClick={() => openBrochure(p.pdf_url!, p.name)}
+                      className="mt-2 flex w-full items-center justify-center gap-1 rounded border px-2 py-1.5 text-xs font-medium text-primary hover:bg-secondary"
+                    >
+                      <FileText size={12} /> Brochure
+                    </button>
+                  )}
                 </CardContent>
               </Card>
             );
