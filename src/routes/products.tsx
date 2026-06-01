@@ -182,21 +182,24 @@ function AllProductsPage() {
                           </span>
                         )}
                       </div>
-                      <Button
-                        onClick={() => enquire(p)}
-                        size="sm"
-                        className="mt-3 w-full gap-1 bg-whatsapp text-whatsapp-foreground hover:bg-whatsapp/90"
-                      >
-                        <MessageCircle size={14} /> Enquire
-                      </Button>
-                      {p.pdf_url && (
-                        <button
-                          onClick={() => openBrochure(p.pdf_url!, p.name)}
-                          className="mt-2 flex w-full items-center justify-center gap-1 rounded border px-2 py-1.5 text-xs font-medium text-primary hover:bg-secondary"
+                      <div className="mt-3 grid grid-cols-2 gap-2">
+                        <Button
+                          onClick={() => enquire(p)}
+                          size="sm"
+                          className="gap-1 bg-whatsapp text-whatsapp-foreground hover:bg-whatsapp/90"
                         >
-                          <FileText size={12} /> Brochure
-                        </button>
-                      )}
+                          <MessageCircle size={14} /> Enquire
+                        </Button>
+                        <Button
+                          onClick={() => p.pdf_url && openBrochure(p.pdf_url, p.name)}
+                          disabled={!p.pdf_url}
+                          size="sm"
+                          variant="outline"
+                          className="gap-1"
+                        >
+                          <FileText size={14} /> Brochure
+                        </Button>
+                      </div>
                     </CardContent>
                   </Card>
                 );
