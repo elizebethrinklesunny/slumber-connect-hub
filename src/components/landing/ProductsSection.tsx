@@ -14,6 +14,7 @@ interface Product {
   price: number | null;
   original_price: number | null;
   image_url: string | null;
+  pdf_url: string | null;
   category: string;
   rating: number | null;
   badge: string | null;
