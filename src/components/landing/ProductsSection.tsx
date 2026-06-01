@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Star, MessageCircle } from "lucide-react";
+import { Star, MessageCircle, FileText } from "lucide-react";
 import { useSiteSettings } from "@/hooks/useSiteSettings";
 
 interface Product {
