@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Star, MessageCircle } from "lucide-react";
+import { Star, MessageCircle, FileText } from "lucide-react";
 import { useSiteSettings } from "@/hooks/useSiteSettings";
 
 interface Product {
@@ -14,6 +14,7 @@ interface Product {
   price: number | null;
   original_price: number | null;
   image_url: string | null;
+  pdf_url: string | null;
   category: string;
   rating: number | null;
   badge: string | null;
@@ -53,6 +54,21 @@ export function ProductsSection() {
       product_id: product.id,
     }).then(() => {});
     window.open(`https://wa.me/${num}?text=${text}`, "_blank");
+  };
+
+  const openBrochure = (url: string, productName: string) => {
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    if (isMobile) {
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `${productName.replace(/\s+/g, "_")}_Brochure.pdf`;
+      a.target = "_blank";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    } else {
+      window.open(url, "_blank", "noopener,noreferrer");
+    }
   };
 
   return (
@@ -129,6 +145,14 @@ export function ProductsSection() {
                   >
                     <MessageCircle size={14} /> Enquire
                   </Button>
+                  {p.pdf_url && (
+                    <button
+                      onClick={() => openBrochure(p.pdf_url!, p.name)}
+                      className="mt-2 flex w-full items-center justify-center gap-1 rounded border px-2 py-1.5 text-xs font-medium text-primary hover:bg-secondary"
+                    >
+                      <FileText size={12} /> Brochure
+                    </button>
+                  )}
                 </CardContent>
               </Card>
             );

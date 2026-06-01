@@ -75,6 +75,21 @@ function AllProductsPage() {
     window.open(`https://wa.me/${num}?text=${text}`, "_blank");
   };
 
+  const openBrochure = (url: string, productName: string) => {
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    if (isMobile) {
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `${productName.replace(/\s+/g, "_")}_Brochure.pdf`;
+      a.target = "_blank";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    } else {
+      window.open(url, "_blank", "noopener,noreferrer");
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <PromoBar />
@@ -175,14 +190,12 @@ function AllProductsPage() {
                         <MessageCircle size={14} /> Enquire
                       </Button>
                       {p.pdf_url && (
-                        <a
-                          href={p.pdf_url}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="mt-2 flex items-center justify-center gap-1 rounded border px-2 py-1.5 text-xs font-medium text-primary hover:bg-secondary"
+                        <button
+                          onClick={() => openBrochure(p.pdf_url!, p.name)}
+                          className="mt-2 flex w-full items-center justify-center gap-1 rounded border px-2 py-1.5 text-xs font-medium text-primary hover:bg-secondary"
                         >
-                          <FileText size={12} /> Download Brochure
-                        </a>
+                          <FileText size={12} /> Brochure
+                        </button>
                       )}
                     </CardContent>
                   </Card>
