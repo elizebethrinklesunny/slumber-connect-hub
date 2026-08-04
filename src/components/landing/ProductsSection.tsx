@@ -47,7 +47,7 @@ export function ProductsSection() {
 
   const inquireOnWhatsApp = (product: Product) => {
     const num = settings.whatsapp_number || "919745358126";
-    const text = encodeURIComponent(`Hi DreamRest! I'm interested in "${product.name}". Could you share more details?`);
+    const text = encodeURIComponent(`Hi Elora! I'm interested in "${product.name}". Could you share more details?`);
     supabase.from("enquiries").insert({
       message: `Product enquiry: ${product.name}`,
       source: `product:${product.category}`,

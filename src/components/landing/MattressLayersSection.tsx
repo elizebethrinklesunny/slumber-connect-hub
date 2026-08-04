@@ -19,7 +19,7 @@ export function MattressLayersSection() {
             </Badge>
             <h2 className="font-display text-4xl font-bold">5 Layers of Pure Comfort</h2>
             <p className="mt-4 text-muted-foreground">
-              Every DreamRest mattress is crafted with five precision-engineered layers, working
+              Every Elora mattress is crafted with five precision-engineered layers, working
               together to give you the deepest, most restorative sleep of your life.
             </p>
             <ul className="mt-6 space-y-3">

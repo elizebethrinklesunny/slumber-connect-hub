@@ -18,9 +18,9 @@ import { WhatsAppFab } from "@/components/landing/WhatsAppFab";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "DreamRest — Premium Mattresses for Perfect Sleep" },
-      { name: "description", content: "Shop premium mattresses, pillows & bedding from DreamRest. 120-night trial, free shipping, 10-year warranty. Chat on WhatsApp for instant help." },
-      { property: "og:title", content: "DreamRest — Premium Mattresses" },
+      { title: "Elora — Premium Mattresses for Perfect Sleep" },
+      { name: "description", content: "Shop premium mattresses, pillows & bedding from Elora. 120-night trial, free shipping, 10-year warranty. Chat on WhatsApp for instant help." },
+      { property: "og:title", content: "Elora — Premium Mattresses" },
       { property: "og:description", content: "Premium mattresses with 120-night trial. Up to 60% OFF — free delivery nationwide." },
     ],
   }),

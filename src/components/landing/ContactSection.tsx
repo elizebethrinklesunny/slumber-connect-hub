@@ -15,7 +15,7 @@ export function ContactSection() {
   const handleWhatsApp = async () => {
     const num = settings.whatsapp_number || "919745358126";
     const text = encodeURIComponent(
-      `Hi DreamRest! I'm ${name || "a customer"}.\n\n${message || "I'd like to know more about your mattresses."}`
+      `Hi Elora! I'm ${name || "a customer"}.\n\n${message || "I'd like to know more about your mattresses."}`
     );
     // Log enquiry (best-effort, don't block WhatsApp open)
     supabase.from("enquiries").insert({
@@ -57,7 +57,7 @@ export function ContactSection() {
               </div>
               <div>
                 <h3 className="font-semibold">Email</h3>
-                <p className="text-sm text-muted-foreground">{settings.contact_email || "hello@dreamrest.com"}</p>
+                <p className="text-sm text-muted-foreground">{settings.contact_email || "hello@elora.com"}</p>
               </div>
             </div>
             <div className="flex items-start gap-4">

@@ -6,7 +6,7 @@ import { AdminSidebar } from "@/components/admin/AdminSidebar";
 
 export const Route = createFileRoute("/admin/dashboard")({
   head: () => ({
-    meta: [{ title: "Admin Dashboard — DreamRest" }],
+    meta: [{ title: "Admin Dashboard — Elora" }],
   }),
   component: AdminLayout,
 });
@@ -52,7 +52,7 @@ function AdminLayout() {
         <div className="flex flex-1 flex-col">
           <header className="sticky top-0 z-10 flex h-14 items-center gap-3 border-b bg-background px-4">
             <SidebarTrigger />
-            <h1 className="font-display text-lg font-semibold">DreamRest Admin</h1>
+            <h1 className="font-display text-lg font-semibold">Elora Admin</h1>
           </header>
           <main className="flex-1 p-4 md:p-6">
             <Outlet />

@@ -100,7 +100,7 @@ export function AdminSidebar() {
       <SidebarHeader className="border-b px-4 py-4">
         {!collapsed ? (
           <div>
-            <p className="font-display text-lg font-bold text-primary">DreamRest</p>
+            <p className="font-display text-lg font-bold text-primary">Elora</p>
             <p className="text-xs text-muted-foreground">Admin Panel</p>
           </div>
         ) : (

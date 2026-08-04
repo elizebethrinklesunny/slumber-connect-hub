@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/dialog";
 
 export const Route = createFileRoute("/admin/dashboard/admins")({
-  head: () => ({ meta: [{ title: "Admin Users — DreamRest Admin" }] }),
+  head: () => ({ meta: [{ title: "Admin Users — Elora Admin" }] }),
   component: AdminsPage,
 });
 
