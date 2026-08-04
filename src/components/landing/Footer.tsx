@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Facebook, Instagram, Twitter, Mail, Phone, MapPin } from "lucide-react";
 import { useSiteSettings } from "@/hooks/useSiteSettings";
 import { toast } from "sonner";
+import eloraLogo from "@/assets/elora-logo.png.asset.json";
 
 export function Footer() {
   const { settings } = useSiteSettings();
@@ -46,7 +47,7 @@ export function Footer() {
       {/* Main grid */}
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 md:grid-cols-4">
         <div>
-          <p className="font-display text-2xl font-bold">Elora</p>
+          <img src={eloraLogo.url} alt="Elora logo" className="h-12 w-auto rounded" />
           <p className="mt-3 text-sm opacity-80">
             Premium mattresses crafted for the perfect night's sleep. Trusted by thousands of happy sleepers.
           </p>
