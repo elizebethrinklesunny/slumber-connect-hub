@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import { Menu, X, Search, MapPin, User, Heart, ShoppingCart } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -17,14 +17,26 @@ const NAV_LINKS = [
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
 
-  const scrollTo = (id: string) => {
+  const scrollToId = (id: string) => {
     if (id === "top") {
       window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
       document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
     }
+  };
+
+  const scrollTo = (id: string) => {
     setOpen(false);
+    if (pathname !== "/") {
+      navigate({ to: "/" }).then(() => {
+        setTimeout(() => scrollToId(id), 150);
+      });
+      return;
+    }
+    scrollToId(id);
   };
 
   return (
