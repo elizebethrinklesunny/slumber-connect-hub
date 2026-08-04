@@ -3,7 +3,7 @@ import { Menu, X, Search, MapPin, User, Heart, ShoppingCart } from "lucide-react
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import eloraLogo from "@/assets/elora-logo.png.asset.json";
+import eloraLogo from "@/assets/elora-logo.png";
 
 const NAV_LINKS = [
   { label: "Home", id: "top" },
@@ -33,7 +33,7 @@ export function Header() {
       <div className="border-b">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3">
           <Link to="/" className="shrink-0">
-            <img src={eloraLogo.url} alt="Elora — from our family to your comfort" className="h-10 w-auto md:h-12" />
+            <img src={eloraLogo} alt="Elora — from our family to your comfort" className="h-10 w-auto md:h-12" />
           </Link>
 
           <div className="hidden flex-1 max-w-xl md:block">
@@ -47,12 +47,12 @@ export function Header() {
           </div>
 
           <div className="flex items-center gap-1 md:gap-3">
-            <button
+            {/* <button
               className="hidden items-center gap-1 text-xs text-muted-foreground transition hover:text-foreground md:flex"
               onClick={() => scrollTo("contact")}
             >
               <MapPin size={16} /> <span>Store</span>
-            </button>
+            </button> */}
             <Link to="/admin" className="hidden md:block">
               <button className="flex items-center gap-1 text-xs text-muted-foreground transition hover:text-foreground">
                 <User size={16} /> <span>Sign In</span>
