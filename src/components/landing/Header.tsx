@@ -3,6 +3,7 @@ import { Menu, X, Search, MapPin, User, Heart, ShoppingCart } from "lucide-react
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import eloraLogo from "@/assets/elora-logo.png.asset.json";
 
 const NAV_LINKS = [
   { label: "Home", id: "top" },
@@ -31,8 +32,8 @@ export function Header() {
       {/* Top utility row */}
       <div className="border-b">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3">
-          <Link to="/" className="font-display text-2xl font-bold text-primary md:text-3xl">
-            Elora
+          <Link to="/" className="shrink-0">
+            <img src={eloraLogo.url} alt="Elora — from our family to your comfort" className="h-10 w-auto md:h-12" />
           </Link>
 
           <div className="hidden flex-1 max-w-xl md:block">
