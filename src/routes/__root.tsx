@@ -30,8 +30,8 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "DreamRest — Premium Mattresses" },
-      { name: "description", content: "Shop premium mattresses from DreamRest." },
+      { title: "Elora — Premium Mattresses" },
+      { name: "description", content: "Shop premium mattresses from Elora." },
     ],
     links: [
       { rel: "stylesheet", href: appCss },

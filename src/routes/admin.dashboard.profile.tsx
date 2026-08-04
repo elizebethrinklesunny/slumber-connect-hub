@@ -9,7 +9,7 @@ import { toast } from "sonner";
 import { User, Mail, Calendar, Shield } from "lucide-react";
 
 export const Route = createFileRoute("/admin/dashboard/profile")({
-  head: () => ({ meta: [{ title: "Profile — DreamRest Admin" }] }),
+  head: () => ({ meta: [{ title: "Profile — Elora Admin" }] }),
   component: ProfilePage,
 });
 

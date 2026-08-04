@@ -6,7 +6,7 @@ export function WhatsAppFab() {
   const { settings } = useSiteSettings();
   const handleClick = () => {
     const num = settings.whatsapp_number || "919745358126";
-    const text = encodeURIComponent("Hi DreamRest! I'd like to know more about your mattresses.");
+    const text = encodeURIComponent("Hi Elora! I'd like to know more about your mattresses.");
     supabase.from("enquiries").insert({
       message: "Clicked floating WhatsApp button",
       source: "whatsapp_fab",

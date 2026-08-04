@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { SettingsTab } from "@/components/admin/SettingsTab";
 
 export const Route = createFileRoute("/admin/dashboard/settings")({
-  head: () => ({ meta: [{ title: "Site Settings — DreamRest Admin" }] }),
+  head: () => ({ meta: [{ title: "Site Settings — Elora Admin" }] }),
   component: () => (
     <div className="space-y-6">
       <div>

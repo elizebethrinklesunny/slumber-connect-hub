@@ -10,8 +10,8 @@ import { toast } from "sonner";
 export const Route = createFileRoute("/admin/")({
   head: () => ({
     meta: [
-      { title: "Admin Login — DreamRest" },
-      { name: "description", content: "Admin login for DreamRest mattress website." },
+      { title: "Admin Login — Elora" },
+      { name: "description", content: "Admin login for Elora mattress website." },
     ],
   }),
   component: AdminLogin,

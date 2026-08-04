@@ -46,7 +46,7 @@ export function Footer() {
       {/* Main grid */}
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 md:grid-cols-4">
         <div>
-          <p className="font-display text-2xl font-bold">DreamRest</p>
+          <p className="font-display text-2xl font-bold">Elora</p>
           <p className="mt-3 text-sm opacity-80">
             Premium mattresses crafted for the perfect night's sleep. Trusted by thousands of happy sleepers.
           </p>
@@ -83,7 +83,7 @@ export function Footer() {
           <h4 className="mb-4 text-sm font-semibold uppercase tracking-widest text-gold">Get In Touch</h4>
           <ul className="space-y-3 text-sm opacity-80">
             <li className="flex items-center gap-2"><Phone size={14} /> {settings.contact_phone || "+91 9745358126"}</li>
-            <li className="flex items-center gap-2"><Mail size={14} /> {settings.contact_email || "hello@dreamrest.com"}</li>
+            <li className="flex items-center gap-2"><Mail size={14} /> {settings.contact_email || "hello@elora.com"}</li>
             <li className="flex items-center gap-2"><MapPin size={14} /> {settings.contact_address || "Kerala, India"}</li>
           </ul>
         </div>
@@ -91,7 +91,7 @@ export function Footer() {
 
       <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 py-5 text-xs opacity-70 md:flex-row">
-          <p>© {new Date().getFullYear()} DreamRest. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Elora. All rights reserved.</p>
           <p>Premium mattresses — designed in India.</p>
         </div>
       </div>

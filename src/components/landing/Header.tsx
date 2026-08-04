@@ -32,7 +32,7 @@ export function Header() {
       <div className="border-b">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3">
           <Link to="/" className="font-display text-2xl font-bold text-primary md:text-3xl">
-            DreamRest
+            Elora
           </Link>
 
           <div className="hidden flex-1 max-w-xl md:block">

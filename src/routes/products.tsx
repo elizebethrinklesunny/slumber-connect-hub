@@ -29,7 +29,7 @@ interface Product {
 export const Route = createFileRoute("/products")({
   head: () => ({
     meta: [
-      { title: "All Products — DreamRest Mattresses, Pillows & Bedding" },
+      { title: "All Products — Elora Mattresses, Pillows & Bedding" },
       { name: "description", content: "Browse our full collection of premium mattresses, pillows and bedding. Filter by category and enquire on WhatsApp." },
     ],
   }),
@@ -66,7 +66,7 @@ function AllProductsPage() {
 
   const enquire = (product: Product) => {
     const num = settings.whatsapp_number || "919745358126";
-    const text = encodeURIComponent(`Hi DreamRest! I'm interested in "${product.name}".`);
+    const text = encodeURIComponent(`Hi Elora! I'm interested in "${product.name}".`);
     supabase.from("enquiries").insert({
       message: `Product enquiry: ${product.name}`,
       source: `products-page:${product.category}`,

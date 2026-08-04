@@ -8,7 +8,7 @@ import { Trash2, MessageCircle, Phone } from "lucide-react";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/admin/dashboard/enquiries")({
-  head: () => ({ meta: [{ title: "Enquiries — DreamRest Admin" }] }),
+  head: () => ({ meta: [{ title: "Enquiries — Elora Admin" }] }),
   component: EnquiriesPage,
 });
 

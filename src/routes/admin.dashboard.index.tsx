@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { MessageSquare, Package, Layers, Star, Image as ImageIcon, Tag } from "lucide-react";
 
 export const Route = createFileRoute("/admin/dashboard/")({
-  head: () => ({ meta: [{ title: "Dashboard — DreamRest Admin" }] }),
+  head: () => ({ meta: [{ title: "Dashboard — Elora Admin" }] }),
   component: DashboardHome,
 });
 
