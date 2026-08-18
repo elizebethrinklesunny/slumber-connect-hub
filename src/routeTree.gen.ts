@@ -9,32 +9,32 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductsRouteImport } from './routes/products'
+import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as AdminDashboardRouteImport } from './routes/admin.dashboard'
 import { Route as AdminDashboardIndexRouteImport } from './routes/admin.dashboard.index'
-import { Route as AdminDashboardAdminsRouteImport } from './routes/admin.dashboard.admins'
-import { Route as AdminDashboardBannersRouteImport } from './routes/admin.dashboard.banners'
-import { Route as AdminDashboardCategoriesRouteImport } from './routes/admin.dashboard.categories'
-import { Route as AdminDashboardDealsRouteImport } from './routes/admin.dashboard.deals'
-import { Route as AdminDashboardEnquiriesRouteImport } from './routes/admin.dashboard.enquiries'
-import { Route as AdminDashboardGalleryRouteImport } from './routes/admin.dashboard.gallery'
-import { Route as AdminDashboardOffersRouteImport } from './routes/admin.dashboard.offers'
-import { Route as AdminDashboardProductsRouteImport } from './routes/admin.dashboard.products'
-import { Route as AdminDashboardProfileRouteImport } from './routes/admin.dashboard.profile'
-import { Route as AdminDashboardSettingsRouteImport } from './routes/admin.dashboard.settings'
-import { Route as AdminDashboardTestimonialsRouteImport } from './routes/admin.dashboard.testimonials'
 import { Route as AdminDashboardTrustBadgesRouteImport } from './routes/admin.dashboard.trust-badges'
+import { Route as AdminDashboardTestimonialsRouteImport } from './routes/admin.dashboard.testimonials'
+import { Route as AdminDashboardSettingsRouteImport } from './routes/admin.dashboard.settings'
+import { Route as AdminDashboardProfileRouteImport } from './routes/admin.dashboard.profile'
+import { Route as AdminDashboardProductsRouteImport } from './routes/admin.dashboard.products'
+import { Route as AdminDashboardOffersRouteImport } from './routes/admin.dashboard.offers'
+import { Route as AdminDashboardGalleryRouteImport } from './routes/admin.dashboard.gallery'
+import { Route as AdminDashboardEnquiriesRouteImport } from './routes/admin.dashboard.enquiries'
+import { Route as AdminDashboardDealsRouteImport } from './routes/admin.dashboard.deals'
+import { Route as AdminDashboardCategoriesRouteImport } from './routes/admin.dashboard.categories'
+import { Route as AdminDashboardBannersRouteImport } from './routes/admin.dashboard.banners'
+import { Route as AdminDashboardAdminsRouteImport } from './routes/admin.dashboard.admins'
 
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ProductsRoute = ProductsRouteImport.update({
   id: '/products',
   path: '/products',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminIndexRoute = AdminIndexRouteImport.update({
@@ -52,14 +52,51 @@ const AdminDashboardIndexRoute = AdminDashboardIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AdminDashboardRoute,
 } as any)
-const AdminDashboardAdminsRoute = AdminDashboardAdminsRouteImport.update({
-  id: '/admins',
-  path: '/admins',
+const AdminDashboardTrustBadgesRoute =
+  AdminDashboardTrustBadgesRouteImport.update({
+    id: '/trust-badges',
+    path: '/trust-badges',
+    getParentRoute: () => AdminDashboardRoute,
+  } as any)
+const AdminDashboardTestimonialsRoute =
+  AdminDashboardTestimonialsRouteImport.update({
+    id: '/testimonials',
+    path: '/testimonials',
+    getParentRoute: () => AdminDashboardRoute,
+  } as any)
+const AdminDashboardSettingsRoute = AdminDashboardSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
   getParentRoute: () => AdminDashboardRoute,
 } as any)
-const AdminDashboardBannersRoute = AdminDashboardBannersRouteImport.update({
-  id: '/banners',
-  path: '/banners',
+const AdminDashboardProfileRoute = AdminDashboardProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => AdminDashboardRoute,
+} as any)
+const AdminDashboardProductsRoute = AdminDashboardProductsRouteImport.update({
+  id: '/products',
+  path: '/products',
+  getParentRoute: () => AdminDashboardRoute,
+} as any)
+const AdminDashboardOffersRoute = AdminDashboardOffersRouteImport.update({
+  id: '/offers',
+  path: '/offers',
+  getParentRoute: () => AdminDashboardRoute,
+} as any)
+const AdminDashboardGalleryRoute = AdminDashboardGalleryRouteImport.update({
+  id: '/gallery',
+  path: '/gallery',
+  getParentRoute: () => AdminDashboardRoute,
+} as any)
+const AdminDashboardEnquiriesRoute = AdminDashboardEnquiriesRouteImport.update({
+  id: '/enquiries',
+  path: '/enquiries',
+  getParentRoute: () => AdminDashboardRoute,
+} as any)
+const AdminDashboardDealsRoute = AdminDashboardDealsRouteImport.update({
+  id: '/deals',
+  path: '/deals',
   getParentRoute: () => AdminDashboardRoute,
 } as any)
 const AdminDashboardCategoriesRoute =
@@ -68,53 +105,16 @@ const AdminDashboardCategoriesRoute =
     path: '/categories',
     getParentRoute: () => AdminDashboardRoute,
   } as any)
-const AdminDashboardDealsRoute = AdminDashboardDealsRouteImport.update({
-  id: '/deals',
-  path: '/deals',
+const AdminDashboardBannersRoute = AdminDashboardBannersRouteImport.update({
+  id: '/banners',
+  path: '/banners',
   getParentRoute: () => AdminDashboardRoute,
 } as any)
-const AdminDashboardEnquiriesRoute = AdminDashboardEnquiriesRouteImport.update({
-  id: '/enquiries',
-  path: '/enquiries',
+const AdminDashboardAdminsRoute = AdminDashboardAdminsRouteImport.update({
+  id: '/admins',
+  path: '/admins',
   getParentRoute: () => AdminDashboardRoute,
 } as any)
-const AdminDashboardGalleryRoute = AdminDashboardGalleryRouteImport.update({
-  id: '/gallery',
-  path: '/gallery',
-  getParentRoute: () => AdminDashboardRoute,
-} as any)
-const AdminDashboardOffersRoute = AdminDashboardOffersRouteImport.update({
-  id: '/offers',
-  path: '/offers',
-  getParentRoute: () => AdminDashboardRoute,
-} as any)
-const AdminDashboardProductsRoute = AdminDashboardProductsRouteImport.update({
-  id: '/products',
-  path: '/products',
-  getParentRoute: () => AdminDashboardRoute,
-} as any)
-const AdminDashboardProfileRoute = AdminDashboardProfileRouteImport.update({
-  id: '/profile',
-  path: '/profile',
-  getParentRoute: () => AdminDashboardRoute,
-} as any)
-const AdminDashboardSettingsRoute = AdminDashboardSettingsRouteImport.update({
-  id: '/settings',
-  path: '/settings',
-  getParentRoute: () => AdminDashboardRoute,
-} as any)
-const AdminDashboardTestimonialsRoute =
-  AdminDashboardTestimonialsRouteImport.update({
-    id: '/testimonials',
-    path: '/testimonials',
-    getParentRoute: () => AdminDashboardRoute,
-  } as any)
-const AdminDashboardTrustBadgesRoute =
-  AdminDashboardTrustBadgesRouteImport.update({
-    id: '/trust-badges',
-    path: '/trust-badges',
-    getParentRoute: () => AdminDashboardRoute,
-  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -241,18 +241,18 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/products': {
       id: '/products'
       path: '/products'
       fullPath: '/products'
       preLoaderRoute: typeof ProductsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/': {
@@ -276,74 +276,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminDashboardIndexRouteImport
       parentRoute: typeof AdminDashboardRoute
     }
-    '/admin/dashboard/admins': {
-      id: '/admin/dashboard/admins'
-      path: '/admins'
-      fullPath: '/admin/dashboard/admins'
-      preLoaderRoute: typeof AdminDashboardAdminsRouteImport
-      parentRoute: typeof AdminDashboardRoute
-    }
-    '/admin/dashboard/banners': {
-      id: '/admin/dashboard/banners'
-      path: '/banners'
-      fullPath: '/admin/dashboard/banners'
-      preLoaderRoute: typeof AdminDashboardBannersRouteImport
-      parentRoute: typeof AdminDashboardRoute
-    }
-    '/admin/dashboard/categories': {
-      id: '/admin/dashboard/categories'
-      path: '/categories'
-      fullPath: '/admin/dashboard/categories'
-      preLoaderRoute: typeof AdminDashboardCategoriesRouteImport
-      parentRoute: typeof AdminDashboardRoute
-    }
-    '/admin/dashboard/deals': {
-      id: '/admin/dashboard/deals'
-      path: '/deals'
-      fullPath: '/admin/dashboard/deals'
-      preLoaderRoute: typeof AdminDashboardDealsRouteImport
-      parentRoute: typeof AdminDashboardRoute
-    }
-    '/admin/dashboard/enquiries': {
-      id: '/admin/dashboard/enquiries'
-      path: '/enquiries'
-      fullPath: '/admin/dashboard/enquiries'
-      preLoaderRoute: typeof AdminDashboardEnquiriesRouteImport
-      parentRoute: typeof AdminDashboardRoute
-    }
-    '/admin/dashboard/gallery': {
-      id: '/admin/dashboard/gallery'
-      path: '/gallery'
-      fullPath: '/admin/dashboard/gallery'
-      preLoaderRoute: typeof AdminDashboardGalleryRouteImport
-      parentRoute: typeof AdminDashboardRoute
-    }
-    '/admin/dashboard/offers': {
-      id: '/admin/dashboard/offers'
-      path: '/offers'
-      fullPath: '/admin/dashboard/offers'
-      preLoaderRoute: typeof AdminDashboardOffersRouteImport
-      parentRoute: typeof AdminDashboardRoute
-    }
-    '/admin/dashboard/products': {
-      id: '/admin/dashboard/products'
-      path: '/products'
-      fullPath: '/admin/dashboard/products'
-      preLoaderRoute: typeof AdminDashboardProductsRouteImport
-      parentRoute: typeof AdminDashboardRoute
-    }
-    '/admin/dashboard/profile': {
-      id: '/admin/dashboard/profile'
-      path: '/profile'
-      fullPath: '/admin/dashboard/profile'
-      preLoaderRoute: typeof AdminDashboardProfileRouteImport
-      parentRoute: typeof AdminDashboardRoute
-    }
-    '/admin/dashboard/settings': {
-      id: '/admin/dashboard/settings'
-      path: '/settings'
-      fullPath: '/admin/dashboard/settings'
-      preLoaderRoute: typeof AdminDashboardSettingsRouteImport
+    '/admin/dashboard/trust-badges': {
+      id: '/admin/dashboard/trust-badges'
+      path: '/trust-badges'
+      fullPath: '/admin/dashboard/trust-badges'
+      preLoaderRoute: typeof AdminDashboardTrustBadgesRouteImport
       parentRoute: typeof AdminDashboardRoute
     }
     '/admin/dashboard/testimonials': {
@@ -353,11 +290,74 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminDashboardTestimonialsRouteImport
       parentRoute: typeof AdminDashboardRoute
     }
-    '/admin/dashboard/trust-badges': {
-      id: '/admin/dashboard/trust-badges'
-      path: '/trust-badges'
-      fullPath: '/admin/dashboard/trust-badges'
-      preLoaderRoute: typeof AdminDashboardTrustBadgesRouteImport
+    '/admin/dashboard/settings': {
+      id: '/admin/dashboard/settings'
+      path: '/settings'
+      fullPath: '/admin/dashboard/settings'
+      preLoaderRoute: typeof AdminDashboardSettingsRouteImport
+      parentRoute: typeof AdminDashboardRoute
+    }
+    '/admin/dashboard/profile': {
+      id: '/admin/dashboard/profile'
+      path: '/profile'
+      fullPath: '/admin/dashboard/profile'
+      preLoaderRoute: typeof AdminDashboardProfileRouteImport
+      parentRoute: typeof AdminDashboardRoute
+    }
+    '/admin/dashboard/products': {
+      id: '/admin/dashboard/products'
+      path: '/products'
+      fullPath: '/admin/dashboard/products'
+      preLoaderRoute: typeof AdminDashboardProductsRouteImport
+      parentRoute: typeof AdminDashboardRoute
+    }
+    '/admin/dashboard/offers': {
+      id: '/admin/dashboard/offers'
+      path: '/offers'
+      fullPath: '/admin/dashboard/offers'
+      preLoaderRoute: typeof AdminDashboardOffersRouteImport
+      parentRoute: typeof AdminDashboardRoute
+    }
+    '/admin/dashboard/gallery': {
+      id: '/admin/dashboard/gallery'
+      path: '/gallery'
+      fullPath: '/admin/dashboard/gallery'
+      preLoaderRoute: typeof AdminDashboardGalleryRouteImport
+      parentRoute: typeof AdminDashboardRoute
+    }
+    '/admin/dashboard/enquiries': {
+      id: '/admin/dashboard/enquiries'
+      path: '/enquiries'
+      fullPath: '/admin/dashboard/enquiries'
+      preLoaderRoute: typeof AdminDashboardEnquiriesRouteImport
+      parentRoute: typeof AdminDashboardRoute
+    }
+    '/admin/dashboard/deals': {
+      id: '/admin/dashboard/deals'
+      path: '/deals'
+      fullPath: '/admin/dashboard/deals'
+      preLoaderRoute: typeof AdminDashboardDealsRouteImport
+      parentRoute: typeof AdminDashboardRoute
+    }
+    '/admin/dashboard/categories': {
+      id: '/admin/dashboard/categories'
+      path: '/categories'
+      fullPath: '/admin/dashboard/categories'
+      preLoaderRoute: typeof AdminDashboardCategoriesRouteImport
+      parentRoute: typeof AdminDashboardRoute
+    }
+    '/admin/dashboard/banners': {
+      id: '/admin/dashboard/banners'
+      path: '/banners'
+      fullPath: '/admin/dashboard/banners'
+      preLoaderRoute: typeof AdminDashboardBannersRouteImport
+      parentRoute: typeof AdminDashboardRoute
+    }
+    '/admin/dashboard/admins': {
+      id: '/admin/dashboard/admins'
+      path: '/admins'
+      fullPath: '/admin/dashboard/admins'
+      preLoaderRoute: typeof AdminDashboardAdminsRouteImport
       parentRoute: typeof AdminDashboardRoute
     }
   }

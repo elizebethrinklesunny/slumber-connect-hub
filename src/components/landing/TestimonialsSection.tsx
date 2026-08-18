@@ -1,30 +1,10 @@
-import { useEffect, useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { useLandingData } from "@/contexts/LandingDataContext";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Star } from "lucide-react";
 
-interface Testimonial {
-  id: string;
-  customer_name: string;
-  rating: number;
-  review_text: string;
-  customer_image_url: string | null;
-}
-
 export function TestimonialsSection() {
-  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
-
-  useEffect(() => {
-    supabase
-      .from("testimonials")
-      .select("*")
-      .eq("is_active", true)
-      .order("sort_order")
-      .then(({ data }) => {
-        if (data) setTestimonials(data);
-      });
-  }, []);
+  const { testimonials } = useLandingData();
 
   if (testimonials.length === 0) return null;
 

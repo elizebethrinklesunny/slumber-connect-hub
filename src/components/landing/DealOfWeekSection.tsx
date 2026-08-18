@@ -1,19 +1,8 @@
-import { useEffect, useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { useState, useEffect } from "react";
+import { useLandingData } from "@/contexts/LandingDataContext";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { MessageCircle } from "lucide-react";
-import { useSiteSettings } from "@/hooks/useSiteSettings";
-
-interface Deal {
-  id: string;
-  title: string;
-  description: string | null;
-  image_url: string | null;
-  price: number | null;
-  original_price: number | null;
-  ends_at: string | null;
-}
 
 function useCountdown(target: string | null) {
   const [remaining, setRemaining] = useState({ d: 0, h: 0, m: 0, s: 0 });
@@ -49,22 +38,9 @@ function TimeBox({ label, value }: { label: string; value: number }) {
 }
 
 export function DealOfWeekSection() {
-  const [deal, setDeal] = useState<Deal | null>(null);
-  const { settings } = useSiteSettings();
-
-  useEffect(() => {
-    supabase
-      .from("deals")
-      .select("*")
-      .eq("is_active", true)
-      .order("sort_order")
-      .limit(1)
-      .then(({ data }) => {
-        if (data && data.length > 0) setDeal(data[0]);
-      });
-  }, []);
-
+  const { deal, settings } = useLandingData();
   const time = useCountdown(deal?.ends_at || null);
+
   if (!deal) return null;
 
   const inquire = () => {

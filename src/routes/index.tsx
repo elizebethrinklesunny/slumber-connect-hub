@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { LandingDataProvider } from "@/contexts/LandingDataContext";
 import { Header } from "@/components/landing/Header";
 import { PromoBar } from "@/components/landing/PromoBar";
 import { BannerSection } from "@/components/landing/BannerSection";
@@ -29,22 +30,24 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <div className="min-h-screen">
-      <PromoBar />
-      <Header />
-      <BannerSection />
-      <TrustBadgesSection />
-      <OffersSection />
-      <CategoriesSection />
-      <ProductsSection />
-      <MattressLayersSection />
-      <DealOfWeekSection />
-      <TestimonialsSection />
-      <SuperSaleBanner />
-      <ContactSection />
-      <GallerySection />
-      <Footer />
-      <WhatsAppFab />
-    </div>
+    <LandingDataProvider>
+      <div className="min-h-screen">
+        <PromoBar />
+        <Header />
+        <BannerSection />
+        <TrustBadgesSection />
+        <OffersSection />
+        <CategoriesSection />
+        <ProductsSection />
+        <MattressLayersSection />
+        <DealOfWeekSection />
+        <TestimonialsSection />
+        <SuperSaleBanner />
+        <ContactSection />
+        <GallerySection />
+        <Footer />
+        <WhatsAppFab />
+      </div>
+    </LandingDataProvider>
   );
 }

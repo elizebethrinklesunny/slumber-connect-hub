@@ -1,31 +1,11 @@
-import { useEffect, useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { useState, useEffect } from "react";
+import { useLandingData } from "@/contexts/LandingDataContext";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-interface Banner {
-  id: string;
-  title: string;
-  subtitle: string | null;
-  image_url: string | null;
-  cta_text: string | null;
-  cta_link: string | null;
-}
-
 export function BannerSection() {
-  const [banners, setBanners] = useState<Banner[]>([]);
+  const { banners } = useLandingData();
   const [current, setCurrent] = useState(0);
-
-  useEffect(() => {
-    supabase
-      .from("banners")
-      .select("*")
-      .eq("is_active", true)
-      .order("sort_order")
-      .then(({ data }) => {
-        if (data && data.length > 0) setBanners(data);
-      });
-  }, []);
 
   useEffect(() => {
     if (banners.length <= 1) return;

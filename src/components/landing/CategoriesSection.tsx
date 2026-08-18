@@ -1,28 +1,9 @@
-import { useEffect, useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { useLandingData } from "@/contexts/LandingDataContext";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
-interface Category {
-  id: string;
-  name: string;
-  description: string | null;
-  image_url: string | null;
-}
-
 export function CategoriesSection() {
-  const [categories, setCategories] = useState<Category[]>([]);
-
-  useEffect(() => {
-    supabase
-      .from("categories")
-      .select("*")
-      .eq("is_active", true)
-      .order("sort_order")
-      .then(({ data }) => {
-        if (data) setCategories(data);
-      });
-  }, []);
+  const { categories } = useLandingData();
 
   if (categories.length === 0) return null;
 

@@ -1,40 +1,15 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
+import { useLandingData } from "@/contexts/LandingDataContext";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Star, MessageCircle, FileText } from "lucide-react";
-import { useSiteSettings } from "@/hooks/useSiteSettings";
-
-interface Product {
-  id: string;
-  name: string;
-  description: string | null;
-  price: number | null;
-  original_price: number | null;
-  image_url: string | null;
-  pdf_url: string | null;
-  category: string;
-  rating: number | null;
-  badge: string | null;
-}
 
 export function ProductsSection() {
-  const [products, setProducts] = useState<Product[]>([]);
+  const { products, settings } = useLandingData();
   const [tab, setTab] = useState("all");
-  const { settings } = useSiteSettings();
-
-  useEffect(() => {
-    supabase
-      .from("products")
-      .select("*")
-      .eq("is_active", true)
-      .order("sort_order")
-      .then(({ data }) => {
-        if (data) setProducts(data);
-      });
-  }, []);
 
   const categories = useMemo(() => {
     const set = new Set<string>(products.map((p) => p.category));
@@ -45,7 +20,7 @@ export function ProductsSection() {
 
   if (products.length === 0) return null;
 
-  const inquireOnWhatsApp = (product: Product) => {
+  const inquireOnWhatsApp = (product: typeof products[number]) => {
     const num = settings.whatsapp_number || "919745358126";
     const text = encodeURIComponent(`Hi Elora! I'm interested in "${product.name}". Could you share more details?`);
     supabase.from("enquiries").insert({
